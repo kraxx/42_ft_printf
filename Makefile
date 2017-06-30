@@ -15,7 +15,7 @@ NAME =	libftprintf.a
 
 # FLAGS =	-Wall -Wextra -Werror
 
-SRC = ft_printf.c
+SRC = *.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -24,8 +24,7 @@ HDR = -I includes/
 all: $(NAME)
 
 $(NAME):
-	@echo make re -C libft
-	gcc -c $(FLAGS) $(SRC) ft_printf.h 
+	gcc -c $(FLAGS) $(SRC) $(HDR) 
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
