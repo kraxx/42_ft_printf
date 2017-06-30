@@ -13,7 +13,7 @@
 
 NAME =	libftprintf.a
 
-FLAGS =	-Wall -Wextra -Werror
+# FLAGS =	-Wall -Wextra -Werror
 
 SRC = ft_printf.c
 
@@ -25,7 +25,7 @@ all: $(NAME)
 
 $(NAME):
 	make re -C libft
-	gcc -c $(FLAGS) $(SRC) ft_printf.h -L libft -lft
+	gcc -c $(FLAGS) $(SRC) ft_printf.h 
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
