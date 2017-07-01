@@ -97,7 +97,7 @@ all: $(NAME)
 
 $(NAME):
 	gcc -c $(FLAGS) $(SRCS) ft_printf.c $(HDR)
-	ar rc $(NAME) $(OBJ)
+	ar rc $(NAME) $(OBJ) ft_printf.o
 	ranlib $(NAME)
 
 clean:
