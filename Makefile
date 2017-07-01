@@ -24,7 +24,7 @@ HDR = -I includes/
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLAGS) $(SRC) $(HDR) -I libft/includes
+	gcc -c $(FLAGS) $(SRC) $(HDR) -I libft/includes -L libft/ -lft
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
