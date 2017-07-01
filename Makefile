@@ -15,7 +15,7 @@ NAME =	libftprintf.a
 
 # FLAGS =	-Wall -Wextra -Werror
 
-SRC = *.c
+SRC = ft_printf.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -24,7 +24,7 @@ HDR = -I includes/
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLAGS) $(SRC) $(HDR) 
+	gcc -c $(FLAGS) $(SRC) $(HDR) -I libft/includes
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
