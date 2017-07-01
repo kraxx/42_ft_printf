@@ -174,11 +174,6 @@ void	postprocess(t_str *master, t_data *data, char *s, va_list *ap)
 	master->ret = ft_strjoin(master->ret, master->tmp);
 }
 
-void	process_C(t_str *master, t_data *data, char *s, va_list *ap)
-{
-	// wide chars. yep.
-}
-
 void	process_c(t_str *master, t_data *data, char *s, va_list *ap)
 {
 	// if (data->mod == 'l')
@@ -198,6 +193,11 @@ void	process_c(t_str *master, t_data *data, char *s, va_list *ap)
 		master->ret = ft_strjoin(master->ret, temp);
 		free(temp);
 	}
+}
+
+void	process_C(t_str *master, t_data *data, char *s, va_list *ap)
+{
+	// wide chars. yep.
 }
 
 void	process_s(t_str *master, t_data *data, char *s, va_list *ap)
