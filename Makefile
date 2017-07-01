@@ -102,6 +102,7 @@ $(NAME):
 
 clean:
 	/bin/rm -f $(OBJ)
+	/bin/rm -f ft_printf.o
 
 fclean: clean
 	/bin/rm -f $(NAME)
