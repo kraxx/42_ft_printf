@@ -679,7 +679,7 @@ int preprocess(t_str *master, char *s, va_list *ap)
 	return (1);
 }
 
-int ft_printf(const char *format, ...)
+int ft_printf(const char * restrict format, ...)
 {
 	va_list ap;
 	t_str master;

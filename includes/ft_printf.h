@@ -46,6 +46,6 @@ typedef struct s_data
 ** 6) 'precision'
 */
 
-int ft_printf(const char *format, ...);
+int ft_printf(const char * restrict format, ...);
 
 #endif
