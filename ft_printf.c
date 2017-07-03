@@ -434,7 +434,7 @@ void	process_D(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_o(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	else if (data->mod == 'i')
+	if (data->mod == 'i')
 		master->tmp = ft_ulltoa_base((unsigned char)va_arg(*ap, int), 8);
 	else if (data->mod == 'h')
 		master->tmp = ft_ulltoa_base((unsigned short)va_arg(*ap, int), 8);
