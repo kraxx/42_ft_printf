@@ -434,13 +434,6 @@ void	process_D(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_o(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	va_list cop;
-	va_copy(cop, *ap);
-	if (va_arg(cop, long long) == 0)
-	{
-		ft_strnew(1);
-		master->tmp[0] = '0';
-	}
 	else if (data->mod == 'i')
 		master->tmp = ft_ulltoa_base((unsigned char)va_arg(*ap, int), 8);
 	else if (data->mod == 'h')
