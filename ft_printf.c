@@ -57,6 +57,18 @@ g G: floating point to decimal or decimal exponent
 n: number of chars written so far
 */
 
+void ft_putstr_pf(char *s)
+{
+	while (*s)
+	{
+		if (*s == -42)
+			ft_putchar(0);
+		else
+			ft_putchar(*s);
+		++s;
+	}
+}
+
 int is_flag(char c)
 {
 	return (c == '-' || c == '+' || c == ' ' || c == '#' || c == '0');
@@ -193,25 +205,19 @@ void	process_c(t_str *master, t_data *data, char *s, va_list *ap)
 	// 	// wint_t, maybe it's different
 	// 	return (process_C(master, data, s, ap));
 	// else
-	// char *temp;
+	char temp;
 
-	// temp = ft_strnew(1);
-	// temp = (char)va_arg(*ap, t_ui);
-	// if (ft_strcmp(temp, 0))
-	// {
-	// 	master->tmp = ft_strnew(1);
-	// 	master->tmp[0] = (char)va_arg(*ap, t_ui);		
-	// }
-	// else
+	temp = (char)va_arg(*ap, t_ui);
+	if (temp == 0)
+	{
+		master->tmp = ft_strnew(1);
+		master->tmp[0] = -42; //special hacky unprintable char	
+	}
+	else
 	{ 		
 		master->tmp = ft_strnew(1);
-		master->tmp[0] = (char)va_arg(*ap, t_ui);
+		master->tmp[0] = temp;
 	}
-}
-
-void	process_C(t_str *master, t_data *data, char *s, va_list *ap)
-{
-	// wide chars. yep.
 }
 
 void	process_s(t_str *master, t_data *data, char *s, va_list *ap)
@@ -576,9 +582,7 @@ void	process_p(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	if (data->spec == 'c')
-		process_c(master, data, s, ap);
-	if (data->spec == 'C')
+	if (data->spec == 'c' || data->spec == 'C')
 		process_c(master, data, s, ap);
 	if (data->spec == 's')
 		process_s(master, data, s, ap);
@@ -714,8 +718,7 @@ int ft_printf(const char * restrict format, ...)
 		format += master.len;
 	}
 	va_end(ap);
-	// gotta count bytes while writing string, then print em. cuz null termintors and unprintables.
-	ft_putstr(master.ret);
+	ft_putstr_pf(master.ret);
 	return (ft_strlen(master.ret));
 }
 
@@ -741,14 +744,14 @@ int ft_printf(const char * restrict format, ...)
 
 // 	// o
 
-// 	printf("pf: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
-// 	ft_printf("ft: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	// printf("pf: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	// ft_printf("ft: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
 	
-// 	printf("pf: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
-// 	ft_printf("ft: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	// printf("pf: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	// ft_printf("ft: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
 
-// 	printf("pf: %%#o: %#o\n", 0);
-// 	ft_printf("ft: %%#o: %#o\n", 0);
+// 	// printf("pf: %%#o: %#o\n", 0);
+// 	// ft_printf("ft: %%#o: %#o\n", 0);
 
 
 // 	// // O
@@ -885,7 +888,10 @@ int ft_printf(const char * restrict format, ...)
 // 	// ft_printf("ft28: |%#+010o|\n", -6969);
 // 	// ft_printf("ft29: |%#+015o|\n", -6969);
 
-// 	// printf("%d\n", ft_printf("ft: |%c%c%c%c|\n", 0,1,2,3));
-// 	// printf("%d\n", printf("pf: |%c%c%c%c|\n", 0,1,2,3));
+// 	printf("pflen: %d\n", printf("pf: |%c%c%c%c%c%c%c|\n", 0,1,2,3, -1, -2, -3));
+// 	ft_printf("ftlen: %d\n", ft_printf("ft: |%c%c%c%c%c%c%c|\n", 0,1,2,3, -1, -2, -3));
+
+// 	printf("pf null len: %d\n", printf("pf: null hurr -> %c <- >:(\n", 0));
+// 	ft_printf("ft null len: %d\n", ft_printf("ft: null hurr -> %c <- >:(\n", 0));
 // }
 

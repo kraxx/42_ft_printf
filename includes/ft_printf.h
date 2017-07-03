@@ -19,14 +19,15 @@
 
 typedef struct s_str
 {
-	char *ret;
 	char *tmp;
+	char *ret;
 	// int ret;
 	int len;
 }				t_str;
 
 typedef struct s_data
 {
+	// char *tmp;
 	int neg;
 	int flag[7];
 	int prec;
@@ -46,6 +47,6 @@ typedef struct s_data
 ** 6) 'precision'
 */
 
-int ft_printf(const char * restrict format, ...);
+int ft_printf(const char *format, ...);
 
 #endif
