@@ -458,14 +458,7 @@ void	process_o(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_O(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	va_list cop;
-	va_copy(cop, *ap);
-	if (va_arg(cop, long long) == 0)
-	{
-		ft_strnew(1);
-		master->tmp[0] = '0';
-	}
-	else if (data->mod == 'i')
+	if (data->mod == 'i')
 		master->tmp = ft_ulltoa_base(va_arg(*ap, long long), 8);
 	else if (data->mod == 'h')
 		master->tmp = ft_ulltoa_base(va_arg(*ap, long long), 8);
@@ -485,14 +478,7 @@ void	process_O(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_x(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	va_list cop;
-	va_copy(cop, *ap);
-	if (va_arg(cop, long long) == 0)
-	{
-		ft_strnew(1);
-		master->tmp[0] = '0';
-	}
-	else if (data->mod == 'i')
+	if (data->mod == 'i')
 		master->tmp = ft_ulltoa_base((unsigned char)va_arg(*ap, int), 16);
 	else if (data->mod == 'h')
 		master->tmp = ft_ulltoa_base((unsigned short)va_arg(*ap, int), 16);
@@ -512,14 +498,7 @@ void	process_x(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_X(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	va_list cop;
-	va_copy(cop, *ap);
-	if (va_arg(cop, long long) == 0)
-	{
-		ft_strnew(1);
-		master->tmp[0] = '0';
-	}
-	else if (data->mod == 'i')
+	if (data->mod == 'i')
 		master->tmp = ft_strupper(ft_ulltoa_base((unsigned char)va_arg(*ap, int), 16));
 	else if (data->mod == 'h')
 		master->tmp = ft_strupper(ft_ulltoa_base((unsigned short)va_arg(*ap, int), 16));
@@ -539,14 +518,7 @@ void	process_X(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_u(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	va_list cop;
-	va_copy(cop, *ap);
-	if (va_arg(cop, long long) == 0)
-	{
-		ft_strnew(1);
-		master->tmp[0] = '0';
-	}
-	else if (data->mod == 'i')
+	if (data->mod == 'i')
 		master->tmp = ft_ulltoa_base((unsigned char)va_arg(*ap, int), 10);
 	else if (data->mod == 'h')
 		master->tmp = ft_ulltoa_base((unsigned short)va_arg(*ap, int), 10);
@@ -566,14 +538,7 @@ void	process_u(t_str *master, t_data *data, char *s, va_list *ap)
 
 void	process_U(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	va_list cop;
-	va_copy(cop, *ap);
-	if (va_arg(cop, long long) == 0)
-	{
-		ft_strnew(1);
-		master->tmp[0] = '0';
-	}
-	else if (data->mod == 'i')
+	if (data->mod == 'i')
 		master->tmp = ft_ulltoa_base(va_arg(*ap, long long), 10);
 	else if (data->mod == 'h')
 		master->tmp = ft_ulltoa_base(va_arg(*ap, long long), 10);
