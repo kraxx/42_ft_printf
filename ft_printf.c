@@ -193,12 +193,16 @@ void	process_c(t_str *master, t_data *data, char *s, va_list *ap)
 	// 	// wint_t, maybe it's different
 	// 	return (process_C(master, data, s, ap));
 	// else
-	if (*s == 0)
-	{ //this is fucked, gotta fix it
-		master->tmp = ft_strnew(1);
-		master->tmp[0] = (char)va_arg(*ap, t_ui);		
-	}
-	else
+	// char *temp;
+
+	// temp = ft_strnew(1);
+	// temp = (char)va_arg(*ap, t_ui);
+	// if (ft_strcmp(temp, 0))
+	// {
+	// 	master->tmp = ft_strnew(1);
+	// 	master->tmp[0] = (char)va_arg(*ap, t_ui);		
+	// }
+	// else
 	{ 		
 		master->tmp = ft_strnew(1);
 		master->tmp[0] = (char)va_arg(*ap, t_ui);
