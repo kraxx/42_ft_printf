@@ -21,8 +21,8 @@ typedef struct s_str
 {
 	char *ret;
 	char *tmp;
+	// int ret;
 	int len;
-	int err;
 }				t_str;
 
 typedef struct s_data
