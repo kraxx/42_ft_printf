@@ -85,7 +85,7 @@ void	postprocess(t_str *master, t_data *data, char *s, va_list *ap)
 		{
 			if (data->spec == 'o' || data->spec == 'O')
 			{
-				if (!ft_strcmp(master->tmp, "0"))
+				if (ft_strlen(master->tmp) != 1 && (!ft_strcmp(master->tmp, "0")))
 					master->tmp = ft_strjoin("0", master->tmp);
 			}
 			else if (data->spec == 'x')
@@ -727,14 +727,14 @@ int ft_printf(const char * restrict format, ...)
 
 // 	// o
 
-// 	// printf("pf: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
-// 	// ft_printf("ft: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	printf("pf: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	ft_printf("ft: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
 	
-// 	// printf("pf: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
-// 	// ft_printf("ft: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	printf("pf: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
+// 	ft_printf("ft: %%#o: %#o, %%#hho: %#hho, %%#ho: %ho, %%#llo: %#llo, %%#lo: %#lo, %%#jo: %#jo, %%#zo: %#zo, %%#to: %#to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, ULLONG_MAX, ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
 
-// 	// printf("pf: %%#o: %#o\n", 0);
-// 	// ft_printf("ft: %%#o: %#o\n", 0);
+// 	printf("pf: %%#o: %#o\n", 0);
+// 	ft_printf("ft: %%#o: %#o\n", 0);
 
 
 // 	// // O

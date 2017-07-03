@@ -17,6 +17,8 @@ static int	find_size(t_ull n, int base)
 	int size;
 
 	size = 0;
+	if (!n)
+		return (1);
 	while (n)
 	{
 		n /= base;
