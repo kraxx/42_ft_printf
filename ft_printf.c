@@ -85,7 +85,7 @@ void	postprocess(t_str *master, t_data *data, char *s, va_list *ap)
 		{
 			if (data->spec == 'o' || data->spec == 'O')
 			{
-				if (master->tmp != '0')
+				if (master->tmp != "0")
 					master->tmp = ft_strjoin("0", master->tmp);
 			}
 			else if (data->spec == 'x')
