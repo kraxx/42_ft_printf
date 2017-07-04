@@ -708,7 +708,7 @@ int preprocess(t_str *master, char *s, va_list *ap)
 	ft_bzero(data.flag, sizeof(int) * 7);
 	if (*s == '%')
 	{
-		master->tmp = ft_strjoin(master->ret, "%");]
+		master->tmp = ft_strjoin(master->ret, "%");
 		ft_freejoin(&master->ret, &master->tmp);
 		++master->len;
 		return (1);
