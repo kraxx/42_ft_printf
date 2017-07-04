@@ -22,13 +22,11 @@ typedef struct s_str
 	char *tmp;
 	char *tmp2;
 	char *ret;
-	// int ret;
 	int len;
 }				t_str;
 
 typedef struct s_data
 {
-	// char *tmp;
 	int neg;
 	int flag[7];
 	int prec;

@@ -90,24 +90,37 @@ static int	is_bit(unsigned char byte, int bit_num)
 	return (0);
 }
 
-void	print_wide_char(int i)
+void	process_widechar(t_str *master, int i)
 {
 	unsigned char *quadbyte;
+	char *temp;
 
 	quadbyte = (unsigned char*)&i;
 	if (!is_bit(quadbyte[0], 1))
-		write(1, quadbyte, 1);
+	{
+		temp = ft_strnew(1);
+		ft_strcpy(temp, quadbyte);
+		master->tmp = ft_strjoin(master->tmp, temp);
+	}
 	if (is_bit(quadbyte[0], 1) && is_bit(quadbyte[0], 2) && !is_bit(quadbyte[0], 3))
-		write(1, quadbyte, 2);
+	{
+		temp = ft_strnew(2);
+		ft_strcpy(temp, quadbyte);
+		master->tmp = ft_strjoin(master->tmp, temp);
+	}
 	if (is_bit(quadbyte[0], 1) && is_bit(quadbyte[0], 2) && is_bit(quadbyte[0], 3)
 		&& !is_bit(quadbyte[0], 4))
 	{
-		write(1, quadbyte, 3);
+		temp = ft_strnew(3);
+		ft_strcpy(temp, quadbyte);
+		master->tmp = ft_strjoin(master->tmp, temp);
 	}
 	if (is_bit(quadbyte[0], 1) && is_bit(quadbyte[0], 2) && is_bit(quadbyte[0], 3)
 		&& is_bit(quadbyte[0], 4) && !is_bit(quadbyte[0], 5))
 	{
-		write(1, quadbyte, 4);
+		temp = ft_strnew(4);
+		ft_strcpy(temp, quadbyte);
+		master->tmp = ft_strjoin(master->tmp, temp);
 	}
 }
 
@@ -309,7 +322,7 @@ void	process_S(t_str *master, t_data *data, char *s, va_list *ap)
 	int *temp = va_arg(*ap, int *);
 	while (*temp)
 	{
-		print_wide_char(*temp++);
+		process_widechar(master, *temp++);
 	}
 }
 
@@ -695,7 +708,7 @@ int preprocess(t_str *master, char *s, va_list *ap)
 	ft_bzero(data.flag, sizeof(int) * 7);
 	if (*s == '%')
 	{
-		master->tmp = ft_strjoin(master->ret, "%");
+		master->tmp = ft_strjoin(master->ret, "%");]
 		ft_freejoin(&master->ret, &master->tmp);
 		++master->len;
 		return (1);
