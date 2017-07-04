@@ -57,16 +57,80 @@ g G: floating point to decimal or decimal exponent
 n: number of chars written so far
 */
 
+
+
+
+
+static int	is_bit(unsigned char byte, int bit_num)
+{
+	if (bit_num == 8)
+		if ((byte & 1) == byte)
+			return (1);
+	if (bit_num == 7)
+		if ((byte & 2) == byte)
+			return (1);
+	if (bit_num == 6)
+		if ((byte & 4) == byte)
+			return (1);
+	if (bit_num == 5)
+		if ((byte & 8) == byte)
+			return (1);
+	if (bit_num == 4)
+		if ((byte & 16) == byte)
+			return (1);
+	if (bit_num == 3)
+		if ((byte & 32) == byte)
+			return (1);
+	if (bit_num == 2)
+		if ((byte & 64) == byte)
+			return (1);
+	if (bit_num == 1)
+		if ((byte & 128) == byte)
+			return (1);
+	return (0);
+}
+
+void	print_wide_char(int i)
+{
+	unsigned char *quadbyte;
+
+	quadbyte = (unsigned char*)&i;
+	if (!is_bit(quadbyte[0], 1))
+		write(1, quadbyte, 1);
+	if (is_bit(quadbyte[0], 1) && is_bit(quadbyte[0], 2) && !is_bit(quadbyte[0], 3))
+		write(1, quadbyte, 2);
+	if (is_bit(quadbyte[0], 1) && is_bit(quadbyte[0], 2) && is_bit(quadbyte[0], 3)
+		&& !is_bit(quadbyte[0], 4))
+	{
+		write(1, quadbyte, 3);
+	}
+	if (is_bit(quadbyte[0], 1) && is_bit(quadbyte[0], 2) && is_bit(quadbyte[0], 3)
+		&& is_bit(quadbyte[0], 4) && !is_bit(quadbyte[0], 5))
+	{
+		write(1, quadbyte, 4);
+	}
+}
+
+
+
+
 void ft_putstr_pf(char *s)
 {
 	while (*s)
 	{
-		if (*s == -42)
+		if (*s == -42) //hacky null terminator workaround
 			ft_putchar(0);
 		else
 			ft_putchar(*s);
 		++s;
 	}
+}
+
+void ft_freejoin(char **s1, char **s2)
+{
+	free(*s1);
+	*s1 = ft_strdup(*s2);
+	free(*s2);
 }
 
 int is_flag(char c)
@@ -227,12 +291,26 @@ void	process_s(t_str *master, t_data *data, char *s, va_list *ap)
 
 	// }
 	// else
-		master->tmp = va_arg(*ap, char *);
+	char *temp = va_arg(*ap, char *);
+	if (temp == NULL)
+	{
+		master->tmp = ft_strnew(6);
+		ft_strcpy(master->tmp, "(null)");
+	}
+	else
+	{
+		master->tmp = ft_strnew(sizeof(temp));
+		ft_strcpy(master->tmp, temp);
+	}
 }
 
 void	process_S(t_str *master, t_data *data, char *s, va_list *ap)
 {
-	// wide chars. yep.
+	int *temp = va_arg(*ap, int *);
+	while (*temp)
+	{
+		print_wide_char(*temp++);
+	}
 }
 
 void	process_d(t_str *master, t_data *data, char *s, va_list *ap)
@@ -617,7 +695,8 @@ int preprocess(t_str *master, char *s, va_list *ap)
 	ft_bzero(data.flag, sizeof(int) * 7);
 	if (*s == '%')
 	{
-		master->ret = ft_strjoin(master->ret, "%");
+		master->tmp = ft_strjoin(master->ret, "%");
+		ft_freejoin(&master->ret, &master->tmp);
 		++master->len;
 		return (1);
 	}
@@ -707,10 +786,11 @@ int ft_printf(const char * restrict format, ...)
 		while (format[master.len] && format[master.len] != '%')
 			++master.len;
 		if (master.len) //copies chars to ret
-		{ //shit needs to be freed
-			master.tmp = ft_strsub(format, 0, master.len);			
-			master.ret = ft_strjoin(master.ret, master.tmp);
+		{
+			master.tmp = ft_strsub(format, 0, master.len);	
+			master.tmp2 = ft_strjoin(master.ret, master.tmp);
 			free(master.tmp);
+			ft_freejoin(&master.ret, &master.tmp2);
 		}
 		else
 			if (!preprocess(&master, (char *)&format[++master.len], &ap))
@@ -727,10 +807,7 @@ int ft_printf(const char * restrict format, ...)
 // 	// all of the basics
 
 // 	// printf(" printf length:    %d\n", printf("printf:    %%c: %c, %%s: %s, %%d: %d, %%o: %o, %%x: %x, %%X: %X, %%i: %i, %%u: %u, %%p, %p", 'c', "string", 101, 123456, 123456, 255255, -234, -505, "pointer"));
-// 	// ft_printf(" ft_printf length: %d\n", ft_printf("ft_printf: %%c: %c, %%s: %s, %%d: %d, %%o: %o, %%x: %x, %%X: %X, %%i: %i, %%u: %u, %%p, %p", 0, "string", 101, 123456, 123456, 255255, -234, -505, "pointer"));
-
-// 	// printf("f2_printf length: %d\n", printf("f2_pritf: %%c: %c\n", 'c'));
-// 	// ft_printf("ft_printf length: %d\n", ft_printf("ft_pritf:  %c\n", 'r'));
+// 	// ft_printf(" ft_printf length: %d\n", ft_printf("ft_printf: %%c: %c, %%s: %s, %%d: %d, %%o: %o, %%x: %x, %%X: %X, %%i: %i, %%u: %u, %%p, %p", 'c', "string", 101, 123456, 123456, 255255, -234, -505, "pointer"));
 
 // 	// // d signed char is fucked
 
@@ -742,7 +819,7 @@ int ft_printf(const char * restrict format, ...)
 // 	// printf("pf: %%D: %D, %%hhD: %hhD, %%hD: %hd, %%llD: %llD, %%lD: %lD, %%jD: %jD, %%zD: %zD, %%tD: %tD\n", LONG_MIN, (signed char)SCHAR_MIN, (short)SHRT_MIN, (long long)LLONG_MIN, (long)LONG_MIN, (intmax_t)INT_MIN, (size_t)INT_MIN, (ptrdiff_t)-12345678910);
 // 	// ft_printf("ft: %%D: %D, %%hhD: %hhD, %%hD: %hd, %%llD: %llD, %%lD: %lD, %%jD: %jD, %%zD: %zD, %%tD: %tD\n", LONG_MIN, (signed char)SCHAR_MIN, (short)SHRT_MIN, (long long)LLONG_MIN, (long)LONG_MIN, (intmax_t)INT_MIN, (size_t)INT_MIN, (ptrdiff_t)-12345678910);
 
-// 	// o
+// 	// // o
 
 // 	// printf("pf: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
 // 	// ft_printf("ft: %%o: %o, %%hho: %hho, %%ho: %ho, %%llo: %llo, %%lo: %lo, %%jo: %jo, %%zo: %zo, %%to: %to\n", UINT_MAX, (unsigned char)UCHAR_MAX, (unsigned short)USHRT_MAX, (unsigned long long)ULLONG_MAX, (unsigned long)ULONG_MAX, (uintmax_t)UINT_MAX, (size_t)UINT_MAX, (ptrdiff_t)-12345678910);
@@ -793,6 +870,7 @@ int ft_printf(const char * restrict format, ...)
 // 	// printf("pf: %%p: %p, %%p: %p, %%p: %p, %%p: %p, %%p: %p, %%p: %p\n", 'c', "string", 10101, -10, 00, -2147483648);
 // 	// ft_printf("ft: %%p: %p, %%p: %p, %%p: %p, %%p: %p, %%p: %p, %%p: %p\n", 'c', "string", 10101, -10, 00, -2147483648);
 
+// 	// // Flags on strings
 
 // 	// printf("|%5.s|\n", "Hello world!");
 // 	// printf("|%6.1s|\n", "Hello world!");
@@ -822,6 +900,8 @@ int ft_printf(const char * restrict format, ...)
 // 	// ft_printf("|%-6.11s|\n", "Hello world!");
 // 	// ft_printf("|%6.12s|\n", "Hello world!");
 	
+// 	// // Flags on ints
+
 // 	// printf("pf01: |%-010.0d|\n", -69);
 // 	// printf("pf02: |%-010.1d|\n", 69);
 // 	// printf("pf03: |%010.2d|\n", -69);
@@ -888,10 +968,37 @@ int ft_printf(const char * restrict format, ...)
 // 	// ft_printf("ft28: |%#+010o|\n", -6969);
 // 	// ft_printf("ft29: |%#+015o|\n", -6969);
 
-// 	printf("pflen: %d\n", printf("pf: |%c%c%c%c%c%c%c|\n", 0,1,2,3, -1, -2, -3));
-// 	ft_printf("ftlen: %d\n", ft_printf("ft: |%c%c%c%c%c%c%c|\n", 0,1,2,3, -1, -2, -3));
+// 	// Null pointer for strings
 
-// 	printf("pf null len: %d\n", printf("pf: null hurr -> %c <- >:(\n", 0));
-// 	ft_printf("ft null len: %d\n", ft_printf("ft: null hurr -> %c <- >:(\n", 0));
+// 	// printf("NULL %s\n", 0);
+// 	// ft_printf("NULL %s\n", 0);
+
+// 	// // Special chars
+
+// 	// printf("pflen: %d\n", printf("pf: |%c%c%c%c%c%c%c|\n", 0,1,2,3, -1, -2, -3));
+// 	// ft_printf("ftlen: %d\n", ft_printf("ft: |%c%c%c%c%c%c%c|\n", 0,1,2,3, -1, -2, -3));
+
+// 	// printf("pf null len: %d\n", printf("pf: null hurr -> %c <- >:(\n", 0));
+// 	// ft_printf("ft null len: %d\n", ft_printf("ft: null hurr -> %c <- >:(\n", 0));
+
+// 	// Wide chars
+
+// 	// int test[3];
+// 	// ft_bzero(&test, 3);
+
+// 	// char* test1 = (char *)test[0];
+// 	// char* test2 = (char *)test[1];
+// 	// char* test3 = (char *)test[2];
+
+
+// 	// test1[0] = 128;
+// 	// test1[1] = 30;
+// 	// test1[2] = 40;
+// 	// test1[3] = 1;
+
+// 	// wchar_t* wchar = (wchar_t *)"字";
+
+// 	// printf("pf: %%C: %C\n", (wchar_t)'😅');
+// 	// ft_printf("ft: %%S: %S\n", wchar);
 // }
 

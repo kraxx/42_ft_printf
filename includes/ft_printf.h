@@ -20,6 +20,7 @@
 typedef struct s_str
 {
 	char *tmp;
+	char *tmp2;
 	char *ret;
 	// int ret;
 	int len;
