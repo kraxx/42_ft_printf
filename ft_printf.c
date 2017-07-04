@@ -299,7 +299,7 @@ void	process_s(t_str *master, t_data *data, char *s, va_list *ap)
 	}
 	else
 	{
-		master->tmp = ft_strnew(sizeof(temp));
+		master->tmp = ft_strnew(ft_strlen(temp));
 		ft_strcpy(master->tmp, temp);
 	}
 }
