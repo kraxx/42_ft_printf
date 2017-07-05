@@ -12,10 +12,6 @@
 
 #include "ft_printf.h"
 
-/*
-** Does not handle %S (wide strings)
-*/
-
 int	preprocess_flags(t_str *master, t_data *data, char *s)
 {
 	int	i;
@@ -48,15 +44,15 @@ int	preprocess_size(t_str *master, t_data *data, char *s)
 	if (ft_isdigit(*s))
 	{
 		data->flag[5] = ft_atoi(s);
-		while (ft_isdigit(*s++))
+		while (ft_isdigit(*s))
 		{
 			++master->len;
+			++s;
 			++i;
 		}
 	}
 	if (*s++ == '.')
 	{
-		++i;
 		++master->len;
 		data->prec = 1;
 		data->flag[6] = ft_atoi(s);
@@ -66,7 +62,7 @@ int	preprocess_size(t_str *master, t_data *data, char *s)
 			++i;
 		}
 	}
-	return (i);
+	return (data->prec ? i + 1 : i);
 }
 
 int	preprocess_mod(t_str *master, t_data *data, char *s)
@@ -111,9 +107,9 @@ int	preprocess(t_str *master, char *s, va_list *ap)
 		return (1);
 	}
 	s += preprocess_flags(master, &data, s);
+	s += preprocess_size(master, &data, s);
 	if (is_mod(*s))
-		s += preprocess_size(master, &data, s);
-	s += preprocess_mod(master, &data, s);
+		s += preprocess_mod(master, &data, s);
 	if (is_spec(*s))
 	{
 		data.spec = *s;

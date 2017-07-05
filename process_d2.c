@@ -25,7 +25,7 @@ void	process_d_reg(t_str *master, t_data *data, va_list *ap)
 		master->tmp = ft_ulltoa_base(temp, 10);
 	}
 	else
-		master->tmp = ft_ulltoa_base(va_arg(*ap, long long), 10);
+		master->tmp = ft_itoa(va_arg(*ap, int));
 }
 
 void	process_jd(t_str *master, t_data *data, va_list *ap)
