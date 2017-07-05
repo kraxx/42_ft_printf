@@ -13,7 +13,23 @@
 
 NAME =	libftprintf.a
 
-# FLAGS =	-Wall -Wextra -Werror
+FLAGS =	-Wall -Wextra -Werror
+
+SRC2 = 	ft_printf.c \
+		helpers.c \
+		identifiers.c \
+		postprocess.c \
+		postprocess2.c \
+		process_big_d.c \
+		process_big_d2.c \
+		process_d.c \
+		process_d2.c \
+		process_cs.c \
+		process_ox.c \
+		process_up.c \
+
+
+
 
 SRC = ft_memset.c \
       ft_bzero.c \
@@ -89,6 +105,8 @@ SRCDIR = libft
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 
+OBJ2 = $(SRC2:.c=.o)
+
 OBJ = $(SRC:.c=.o)
 
 HDR = -I includes/
@@ -96,13 +114,12 @@ HDR = -I includes/
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLAGS) $(SRCS) ft_printf.c $(HDR)
-	ar rc $(NAME) $(OBJ) ft_printf.o
+	gcc -c $(FLAGS) $(SRCS) $(SRC2) $(HDR)
+	ar rc $(NAME) $(OBJ) $(OBJ2)
 	ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ)
-	/bin/rm -f ft_printf.o
+	/bin/rm -f $(OBJ) $(OBJ2)
 
 fclean: clean
 	/bin/rm -f $(NAME)

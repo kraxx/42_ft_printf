@@ -21,6 +21,7 @@
 # include <fcntl.h>
 
 typedef unsigned char		t_uc;
+typedef unsigned short		t_ush;
 typedef unsigned int		t_ui;
 typedef unsigned long long	t_ull;
 
