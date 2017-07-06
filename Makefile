@@ -38,6 +38,7 @@ SRC = 	ft_printf.c \
 		ft_strlen.c \
 		ft_strnew.c \
 		ft_strsub.c \
+		ft_strupper.c \
 		ft_ulltoa_base.c
 
 SRCDIR = src

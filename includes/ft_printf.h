@@ -116,6 +116,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strnew(size_t size);
 char	*ft_strsub(char const *s, t_ui start, size_t len);
+char	*ft_strupper(char *s);
 char	*ft_ulltoa_base(t_ull n, int base);
 
 #endif
