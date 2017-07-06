@@ -20,6 +20,10 @@
 # include <stdarg.h>
 # include <stddef.h>
 
+typedef unsigned char		t_uc;
+typedef unsigned int		t_ui;
+typedef unsigned long long	t_ull;
+
 typedef struct s_str
 {
 	char *tmp;

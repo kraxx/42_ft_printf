@@ -56,7 +56,7 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ) $(OBJ2)
+	/bin/rm -f $(OBJ)
 
 fclean: clean
 	/bin/rm -f $(NAME)
