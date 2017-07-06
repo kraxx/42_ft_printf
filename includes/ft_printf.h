@@ -6,12 +6,12 @@
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/22 19:57:45 by jchow             #+#    #+#             */
-/*   Updated: 2017/06/22 19:57:46 by jchow            ###   ########.fr       */
+/*   Updated: 2017/07/05 17:39:13 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF
-# define FT_PRINTF
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -26,22 +26,22 @@ typedef unsigned int		t_ui;
 typedef unsigned short		t_ush;
 typedef unsigned long long	t_ull;
 
-typedef struct s_str
+typedef struct				s_str
 {
-	char *tmp;
-	char *tmp2;
-	char *ret;
-	int len;
-}				t_str;
+	char	*tmp;
+	char	*tmp2;
+	char	*ret;
+	int		len;
+}							t_str;
 
-typedef struct s_data
+typedef struct				s_data
 {
-	int neg;
-	int flag[7];
-	int prec;
-	char mod;
-	char spec;
-}				t_data;
+	int		neg;
+	int		flag[7];
+	int		prec;
+	char	mod;
+	char	spec;
+}							t_data;
 
 /*
 ** Flags:
@@ -55,7 +55,7 @@ typedef struct s_data
 ** 6) 'precision'
 */
 
-int ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 void	ft_putstr_pf(char *s);
 void	ft_freejoin(char **s1, char **s2);
@@ -63,8 +63,8 @@ void	ft_freeappend(char **s1, char **s2, char *c, int left);
 int		is_flag(char c);
 int		is_mod(char c);
 int		is_spec(char c);
-void	postprocess_prefix(t_str *master, t_data *data);
-void	postprocess_num_space(t_str *master, t_data *data, int i, int j);
+void	postprocess_prefix(t_str *m, t_data *d);
+void	postprocess_num_space(t_str *m, t_data *d, int i, int j);
 void	postprocess_num_zero(t_str *master, t_data *data, int i, int j);
 void	postprocess_num_zero_prec(t_str *master, t_data *data, int i, int j);
 void	postprocess_width(t_str *master, t_data *data, int i, int j);

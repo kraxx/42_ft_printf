@@ -16,6 +16,7 @@ static int	ft_islower(int c)
 {
 	return (c >= 'a' && c <= 'z');
 }
+
 char		*ft_strupper(char *s)
 {
 	char *head;
