@@ -102,7 +102,7 @@ void						process_x(t_str *m, t_data *d, va_list *ap);
 void						process_big_x(t_str *m, t_data *d, va_list *ap);
 void						process_u(t_str *m, t_data *d, va_list *ap);
 void						process_big_u(t_str *m, t_data *d, va_list *ap);
-void						process_p(t_str *m, t_data *d, va_list *ap);
+void						process_p(t_str *m, va_list *ap);
 void						process(t_str *m, t_data *d, va_list *ap);
 int							preprocess_flags(t_str *m, t_data *d, char *s);
 int							preprocess_size(t_str *m, t_data *d, char *s);
