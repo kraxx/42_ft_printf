@@ -23,6 +23,7 @@
 
 typedef unsigned char		t_uc;
 typedef unsigned int		t_ui;
+typedef unsigned short		t_ush;
 typedef unsigned long long	t_ull;
 
 typedef struct s_str
