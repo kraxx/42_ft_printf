@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
-# include <stdio.h>
+# include <stdint.h>
 # include <stdarg.h>
 # include <stddef.h>
 
