@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/08 00:49:24 by jchow             #+#    #+#             */
-/*   Updated: 2017/06/08 00:49:38 by jchow            ###   ########.fr       */
+/*   Created: 2017/06/08 00:53:29 by jchow             #+#    #+#             */
+/*   Updated: 2017/06/08 00:53:38 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	n;
-
-	n = 0;
-	while (*s++)
-		n++;
-	return (n);
+	while (*s1 || *s2)
+		if (*s1++ != *s2++)
+			return (*(t_uc *)--s1 - *(t_uc *)--s2);
+	return (0);
 }

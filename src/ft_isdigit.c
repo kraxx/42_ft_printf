@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/05 12:35:32 by jchow             #+#    #+#             */
-/*   Updated: 2017/06/08 00:45:54 by jchow            ###   ########.fr       */
+/*   Created: 2017/06/07 13:52:06 by jchow             #+#    #+#             */
+/*   Updated: 2017/06/08 00:16:38 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strnew(size_t size)
+int	ft_isdigit(int c)
 {
-	return ((char *)ft_memalloc(sizeof(char) * (size + 1)));
+	return (c >= '0' && c <= '9');
 }

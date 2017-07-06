@@ -6,7 +6,7 @@
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 01:04:05 by jchow             #+#    #+#             */
-/*   Updated: 2017/07/05 01:04:07 by jchow            ###   ########.fr       */
+/*   Updated: 2017/07/05 16:46:17 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	postprocess_num(t_str *master, t_data *data)
 		postprocess_width(master, data, i, j);
 	else
 	{
-		if (!data->neg)
+		if (!data->neg && (data->spec == 'd' ||
+					data->spec == 'D' || data->spec == 'i'))
 		{
 			if (data->flag[1])
 				ft_freeappend(&master->tmp, &master->tmp2, "+", 1);

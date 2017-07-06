@@ -18,7 +18,7 @@ void	process_d_reg(t_str *master, t_data *data, va_list *ap)
 	unsigned int	temp;
 
 	va_copy(cop, *ap);
-	if (va_arg(cop, long long) < 0)
+	if (va_arg(cop, int) < 0)
 	{
 		data->neg = 1;
 		temp = -1 * va_arg(*ap, long long);

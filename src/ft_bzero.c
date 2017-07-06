@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/08 00:07:45 by jchow             #+#    #+#             */
-/*   Updated: 2017/06/08 00:07:46 by jchow            ###   ########.fr       */
+/*   Created: 2017/06/07 13:51:14 by jchow             #+#    #+#             */
+/*   Updated: 2017/06/08 00:14:04 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putchar(char c)
+static void	*ft_memset(void *s, int c, size_t n)
 {
-	ft_putchar_fd(c, 1);
+	while (n--)
+		((t_uc *)s)[n] = (t_uc)c;
+	return (s);
+}
+
+void		ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, 0, n);
 }

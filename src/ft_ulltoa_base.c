@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 11:27:14 by jchow             #+#    #+#             */
-/*   Updated: 2017/06/08 21:30:38 by jchow            ###   ########.fr       */
+/*   Created: 2017/06/26 22:51:42 by jchow             #+#    #+#             */
+/*   Updated: 2017/06/26 23:25:29 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	find_size(int n)
+static int	find_size(t_ull n, int base)
 {
 	int size;
 
-	size = (n <= 0) ? 1 : 0;
+	size = 0;
+	if (!n)
+		return (1);
 	while (n)
 	{
-		n /= 10;
+		n /= base;
 		size++;
 	}
 	return (size);
 }
 
-char		*ft_itoa(int n)
+char		*ft_ulltoa_base(t_ull n, int base)
 {
+	char	master[16];
 	char	*str;
-	int		sign;
 	int		size;
 
-	sign = (n < 0) ? 1 : 0;
-	size = find_size(n);
+	ft_strcpy(master, "0123456789abcdef");
+	size = find_size(n, base);
 	str = ft_strnew(size);
 	if (!str)
 		return (NULL);
@@ -43,13 +45,8 @@ char		*ft_itoa(int n)
 	}
 	while (--size > -1)
 	{
-		if (n % 10 > 0)
-			str[size] = (n % 10) + '0';
-		else
-			str[size] = ((n % 10) * (-1)) + '0';
-		n /= 10;
+		str[size] = master[n % base];
+		n /= base;
 	}
-	if (sign)
-		str[++size] = '-';
 	return (str);
 }

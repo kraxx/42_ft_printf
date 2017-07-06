@@ -6,7 +6,7 @@
 /*   By: jchow <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 01:04:10 by jchow             #+#    #+#             */
-/*   Updated: 2017/07/05 02:09:36 by jchow            ###   ########.fr       */
+/*   Updated: 2017/07/05 16:46:42 by jchow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	postprocess_prefix(t_str *master, t_data *data)
 
 void	postprocess_num_space(t_str *master, t_data *data, int i, int j)
 {
-	if (!data->neg)
+	if (!data->neg && (data->spec == 'd' ||
+				data->spec == 'D' || data->spec == 'i'))
 	{
 		if (data->flag[1])
 			ft_freeappend(&master->tmp, &master->tmp2, "+", 1);
@@ -52,7 +53,8 @@ void	postprocess_num_zero(t_str *master, t_data *data, int i, int j)
 				data->flag[2] || data->neg) ? 1 : 0);
 	while (i-- > j)
 		ft_freeappend(&master->tmp, &master->tmp2, "0", 1);
-	if (!data->neg)
+	if (!data->neg && (data->spec == 'd' ||
+				data->spec == 'D' || data->spec == 'i'))
 	{
 		if (data->flag[1])
 			ft_freeappend(&master->tmp, &master->tmp2, "+", 1);
@@ -67,7 +69,8 @@ void	postprocess_num_zero_prec(t_str *master, t_data *data, int i, int j)
 {
 	while ((size_t)data->flag[6] > ft_strlen(master->tmp))
 		ft_freeappend(&master->tmp, &master->tmp2, "0", 1);
-	if (!data->neg)
+	if (!data->neg && (data->spec == 'd' ||
+				data->spec == 'D' || data->spec == 'i'))
 	{
 		if (data->flag[1])
 			ft_freeappend(&master->tmp, &master->tmp2, "+", 1);
